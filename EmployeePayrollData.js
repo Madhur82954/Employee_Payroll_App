@@ -4,7 +4,10 @@ class EmployeePayrollData {
     }
 
     set name(name) {
-        this._name = name;
+        let nameregex=RegExp("^[A-Z]{1}[a-z]{2,}$");
+        if(nameregex.test(name))
+            this._name = name;
+        else throw "Name is Incorrect";
     }
 
     get profilePic() {
@@ -53,5 +56,12 @@ class EmployeePayrollData {
 
     set start_date(start_date) {
         this._start_date = start_date;
+    }
+
+    toString()
+    {
+        const options={year:'numeric' , month:'long' , day:'numeric'};
+        const empdate=!this.start_date ? "undefined" : this.start_date.tolocaleDateString("en-US",options);
+        return 'Name = '+this.name+", Gender = "+this.gender+", profile pic + "+this.profilePic+", Department = "+this.department+", Salary = "+this.salary+", StartDate = "+this.start_date+", Note = "+this.note;
     }
 }
